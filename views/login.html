@@ -1,0 +1,22 @@
+{{ define "Login" }}
+<h1 class="my-5 text-center">Login</h1>
+<hr>
+<form action="/auth" method="post">
+  <div class="row">
+    <div class="col-4 offset-4">
+      <div class="form-group">
+        <strong><label for="">Login Name</label></strong>
+        <input type="text" name="user" class="form-control">
+      </div>
+      <div class="form-group">
+        <strong><label for="">Password</label></strong>
+        <input type="password" name="password" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="Submit" class="btn btn-lg btn-primary">
+      </div>
+    </div>
+  </div>
+</form>
+{{ end }}

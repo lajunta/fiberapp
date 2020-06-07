@@ -1,0 +1,13 @@
+{{ define "PageShow" }}
+<h1 class="my-5">{{ .Title }}</h1>
+<small><i>{{ to_date2 .CreatedAt }} <a href="/tags/{{ .Tag }}/1">{{ .Tag }}</a> </i></small>
+<hr>
+<div id="content" class="my-2">{{ .Body }} </div>
+
+<script>
+  document.getElementById('content').innerHTML =
+    marked(document.getElementById('content').innerHTML);
+</script>
+
+
+{{ end }}

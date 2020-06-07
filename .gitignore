@@ -1,0 +1,12 @@
+*.gz
+.env
+bin
+bin/app
+go.sum
+tmp
+/public/images
+/public/app.js
+/public/app.css
+/public/app.js.map
+/node_modules
+.sass-cache

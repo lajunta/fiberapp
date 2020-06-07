@@ -1,0 +1,15 @@
+{{ define "AdminNav" }}
+<nav class="navbar navbar-expand-sm navbar-light header bg-white">
+
+  <a class="navbar-brand" href="/">App Logo</a>
+  <ul class="navbar-nav ml-auto">
+    {{ if .Logined }}
+    <li class="nav-item"><a href="/admin/pages/1" class="nav-link">Pages</a></li>
+    <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+    {{ else }}
+    <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+    {{ end }}
+  </ul>
+
+</nav>
+{{ end }}

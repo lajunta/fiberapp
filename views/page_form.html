@@ -1,0 +1,47 @@
+{{ define "PageForm" }}
+<h1 class="my-5">{{ .Page.Title }}</h1>
+{{ $pid := hex .Page.ID }}
+{{ if eq $pid "000000000000000000000000"}}
+<form action="/admin/pages" method="post">
+  {{ else }}
+  <form action="/admin/pages/{{ $pid }}" method="post">
+    {{ end }}
+    
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <strong><label for="">Title</label></strong>
+          <input type="text" name="title" class="form-control" value="{{ .Page.Title}}">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <strong><label for="">Tag</label></strong>
+          <select name="tag" class="minor form-control">
+            {{ $tag := .Page.Tag }}
+            {{ range .Tags }}
+            <option value={{.}} {{if eq . $tag }}selected="selected"{{end}}>{{.}}</option>
+            {{ end }}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <a href="#" class="btn bg-primary text-white mx-2 rounded-0 btn-write">Write</a><a href="#" class="rounded-0 btn btn-preview">Preview</a>
+    <hr style="margin:0 0 1em;">
+    <div class="row">
+      <div class="col editor-col">
+        <textarea id="editor" name="body" rows=20 class="editor w-100 border-0">{{ .Page.Body }}</textarea>
+      </div>
+      <div class="col preview">
+
+      </div>
+    </div>
+
+    <hr>
+    <div class="form-group d-flex justify-content-between">
+      <input type="submit" value="Submit" class="btn btn-primary">
+    </div>
+  </form>
+
+  {{ end }}

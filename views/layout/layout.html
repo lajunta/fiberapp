@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>{{ .Title }}</title>
+  <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/static/app.css">
+  <script charset="utf-8" src="/static/app.js"></script>
+</head>
+
+<body>
+  {{ template "MainNav" . }}
+  <div class="container ">
+    <div class="main bg-white p-4 my-3">
+      {{ .Data }}
+    </div>
+  </div>
+</body>
+</html>

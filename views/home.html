@@ -1,0 +1,63 @@
+{{ define "Home" }}
+{{ $pageNum := .PN.Page }}
+
+<h2 class="my-2">{{ .Header }}</h2>
+<small><i> / </i></small>
+<hr>
+
+{{ range $page := .Data }}
+
+  <h4 class="mb-2">
+    <a href="/pages/show/{{ hex $page.ID }}">{{ $page.Title }}</a>
+  </h4>
+  <p class="text-secondary"><small><i> <a href="/tags/{{$page.Tag}}/1">
+        </a>{{ to_date2 $page.CreatedAt }} {{ $page.Tag }}</i></small> </p>
+
+{{ end }}
+
+<nav aria-label="navigation" class="my-5">
+  <ul class="pagination justify-content-center">
+    {{if eq .PN.Page 1}}
+    <li class="page-item disabled">
+      <a href="/?page=1" class="page-link">First</a>
+    </li>
+    <li class="page-item disabled">
+      <a href="/?page={{.PN.Prev}}" class="page-link">Prev</a>
+    </li>
+    {{ else }}
+    <li class="page-item">
+      <a href="/?page=1" class="page-link">First</a>
+    </li>
+    <li class="page-item ">
+      <a href="/?page={{.PN.Prev}}" class="page-link">Prev</a>
+    </li>
+    {{ end }}
+
+    {{ range .PN.Pages 2 2 }}
+    {{ if eq . 0}}
+    <li class="page-item disabled">
+      <a class="page-link">...</a>
+    </li>
+    {{ else if eq . $.PN.Page }}
+    <li class="page-item active">
+      <a class="page-link">{{.}}</a>
+    </li>
+    {{ else }}
+    <li class="page-item">
+      <a href="/?page={{.}}" class="page-link">{{.}}</a>
+    </li>
+    {{ end }}
+    {{ end }}
+
+    {{ if lt .PN.Page .PN.MaxPage }}
+    <li class="page-item">
+      <a href="/?page={{.PN.Next}}" class="page-link">Next</a>
+    </li>
+    <li class="page-item">
+      <a href="/?page={{.PN.MaxPage}}" class="page-link">Last</a>
+    </li>
+    {{ end }}
+  </ul>
+</nav>
+
+{{ end }}

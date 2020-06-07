@@ -1,0 +1,93 @@
+{{ define "PageIndex" }}
+{{ $pageNum := .PN.Page }}
+{{ $tag := .Params.Tag }}
+{{ $title := .Params.Title }}
+<h1 class="my-5 text-center">Pages List</h1>
+<form action="/admin/pages/search" method="get" class="form-inline justify-content-center mb-2">
+  <div class="form-group">
+    <label for="">Title</label>
+    <input type="text" name="title" class="form-control" value={{ .title }}>
+  </div>
+  <div class="form-group">
+    <label for="">Tag</label>
+    <select name="tag" class="form-control">
+      <option ></option>
+      {{ range .Tags }}
+      <option value={{.}} {{if eq . $tag }} selected="selected" {{end}}>{{.}}</option>
+      {{ end }}
+    </select>
+
+  </div>
+  <input type="submit" name="submit" class="btn btn-light">
+</form>
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Number</th>
+    <th>Title</th>
+    <th>Tag</th>
+    <th>CratedAt</th>
+    <th ></th>
+  </tr>
+  {{ range $idx,$page := .Data }}
+  <tr>
+    <td>{{ page_num $pageNum $idx }}</td>
+    <td><a href="/pages/show/{{ hex $page.ID }}">{{ $page.Title }}</a></td>
+    <td><a href="/tags/{{ $page.Tag }}/1">{{$page.Tag}}</a></td>
+    <td>{{ to_date2 $page.CreatedAt }}</td>
+    <td>
+      <a href="/admin/pages/edit/{{ hex $page.ID }}" class=" text-secondary ">Edit</a>
+      <a href="/admin/pages/delete/{{ hex $page.ID }}" class=" text-danger " onclick="confirm('Really to delete?')">Delete</a>
+    </td>
+  </tr>
+  {{ end }}
+</table>
+
+<nav aria-label="navigation" class="my-5">
+  <ul class="pagination justify-content-center">
+    {{if eq .PN.Page 1}}
+    <li class="page-item disabled">
+      <a href="/admin/pages?page=1" class="page-link">First</a>
+    </li>
+    <li class="page-item disabled">
+      <a href="/admin/pages?page={{.PN.Prev}}" class="page-link">Prev</a>
+    </li>
+    {{ else }}
+    <li class="page-item">
+      <a href="/admin/pages?page=1" class="page-link">First</a>
+    </li>
+    <li class="page-item ">
+      <a href="/admin/pages?page={{.PN.Prev}}" class="page-link">Prev</a>
+    </li>
+    {{ end }}
+
+    {{ range .PN.Pages 2 2 }}
+    {{ if eq . 0}}
+    <li class="page-item disabled">
+      <a class="page-link">...</a>
+    </li>
+    {{ else if eq . $.PN.Page }}
+    <li class="page-item active">
+      <a class="page-link">{{.}}</a>
+    </li>
+    {{ else }}
+    <li class="page-item">
+      <a href="/admin/pages?page={{.}}" class="page-link">{{.}}</a>
+    </li>
+    {{ end }}
+    {{ end }}
+
+    {{ if lt .PN.Page .PN.MaxPage }}
+    <li class="page-item">
+      <a href="/admin/pages?page={{.PN.Next}}" class="page-link">Next</a>
+    </li>
+    <li class="page-item">
+      <a href="/admin/pages?page={{.PN.MaxPage}}" class="page-link">Last</a>
+    </li>
+    {{ end }}
+  </ul>
+</nav>
+
+
+<p class="text-center my-3"><a href="/admin/pages/new" class="btn btn-primary btn-lg">New Page</a></p>
+
+{{ end }}

@@ -1,0 +1,77 @@
+@charset "utf-8";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/highlight.js/scss/github.scss";
+
+p {
+  line-height: 2em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1.25em 0 0;
+  color: rgb(75, 75, 75);
+}
+
+body {
+  background-color: #fbfbfc;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.operator {
+  display: none;
+}
+
+a {
+  color: rgb(51, 51, 51);
+}
+
+
+small {
+  color: #9c9c9c;
+}
+
+#content {
+  min-height: 72vh;
+}
+
+.main {
+  min-height: 88vh;
+}
+
+#preview {
+  overflow: auto;
+  min-height: 300px;
+}
+
+.preview {
+  display: none;
+}
+
+textarea[name="treevalues"] {
+  height: 1em;
+}
+
+small a {
+  color: #9c9c9c !important;
+}
+
+textarea {
+  border: none;
+  overflow: auto;
+  outline: none;
+
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  resize: none;
+  /*remove the resize handle on the bottom right*/
+}

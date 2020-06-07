@@ -1,0 +1,16 @@
+{
+  "name": "fiberapp",
+  "version": "1.0.0",
+  "main": "./src/app.js",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.5.0",
+    "highlight.js": "^10.0.3",
+    "jquery": "^3.5.1",
+    "marked": "^1.1.0"
+  },
+  "scripts": {
+    "build-css": "node-sass --include-path scss src/app.scss public/app.css",
+    "watch-css": "nodemon -e scss -x \"yarn run build-css\""
+  }
+}
